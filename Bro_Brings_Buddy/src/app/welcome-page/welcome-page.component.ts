@@ -1,18 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-welcome-page',
   imports: [],
-  templateUrl: './welcome-page.html',
-  styleUrl: './welcome-page.css',
+  templateUrl: './welcome-page.component.html',
+  styleUrl: './welcome-page.component.css',
 })
-export class WelcomePage {
-  constructor(){}
+export class WelcomePageComponenet {
+  private router = inject(Router)
 
   onClickSignIn() {
-    console.log('clicked sign in')
+    this.router.navigate(['/sign-in'])
   }
   onClickLogIn() {
-    console.log('clicked log in')
+    this.router.navigate(['/log-in'])
   }
 }
