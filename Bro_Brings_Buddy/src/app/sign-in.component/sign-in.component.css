@@ -65,3 +65,46 @@
     justify-content: flex-start;
   }
 }
+
+.info-icon {
+  position: relative;
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-size: 1.1rem;
+  color: #319890;
+  cursor: help;
+  font-weight: bold;
+}
+
+.info-icon .tooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1d4949;
+  color: #d9e2f1;
+  text-align: left;
+  border-radius: 6px;
+  padding: 0.75rem;
+  z-index: 1000;
+  white-space: nowrap;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  font-size: 0.85rem;
+  font-weight: normal;
+  border: 1px solid #319890;
+}
+
+.info-icon .tooltip ul {
+  margin: 0.5rem 0 0 1.5rem;
+  padding: 0;
+  list-style-type: disc;
+}
+
+.info-icon .tooltip li {
+  margin: 0.25rem 0;
+}
+
+.info-icon:hover .tooltip {
+  visibility: visible;
+}

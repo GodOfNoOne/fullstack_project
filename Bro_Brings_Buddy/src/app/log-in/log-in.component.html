@@ -5,18 +5,18 @@
 </div>
 
 
-<form (ngSubmit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
     <h2>Login</h2>
 
     <div>
         <div class="control no-margin">
             <label for="username">Username</label>
-            <input id="username" type="username"/>
+            <input id="username" type="username" formControlName="username"/>
         </div>
 
         <div class="control no-margin">
             <label for="password">Password</label>
-            <input id="password" type="password" />
+            <input id="password" type="password" formControlName="password"/>
         </div>
 
         <div class="form-footer">
@@ -29,5 +29,13 @@
             </p>
         </div>
     </div>
+
+    @if (usernameIsInvalid) {
+        <p class="control-error">Please enter a valid username</p>
+    }
+
+    @if (passwordIsInvalid) {
+        <p class="control-error">Please enter a valid password</p>
+    }
 
 </form>
