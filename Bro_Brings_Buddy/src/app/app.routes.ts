@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
 import { WelcomePageComponenet } from './welcome-page/welcome-page.component';
 import { LogInComponent } from './log-in/log-in.component';
-import { SignInComponent } from './sign-in.component/sign-in.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 export const routes: Routes = [
     {
@@ -23,6 +25,16 @@ export const routes: Routes = [
         path: 'sign-in',
         component:SignInComponent,
         title: 'Sign In'
+    },
+    {
+        path: 'home',
+        component:HomePageComponent,
+        title: 'Home Page'
+    },
+    {
+        path: '**',
+        component:NotFoundComponent,
+        title: '404 NOT FOUND'
     }
 
 ];

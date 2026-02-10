@@ -1,41 +1,39 @@
 <div class="back-container">
-    <button class="back-button" routerLink="/welcome">
-        <span class="arrow">⟵</span> Back to Welcome Page
-    </button>
+  <button class="back-button" routerLink="/welcome">
+    <span class="arrow">⟵</span> Back to Welcome Page
+  </button>
 </div>
 
-
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <h2>Login</h2>
+  <h2>Login</h2>
 
-    <div>
-        <div class="control no-margin">
-            <label for="username">Username</label>
-            <input id="username" type="username" formControlName="username"/>
-        </div>
-
-        <div class="control no-margin">
-            <label for="password">Password</label>
-            <input id="password" type="password" formControlName="password"/>
-        </div>
-
-        <div class="form-footer">
-            <p class="register-text">
-                Don’t have a user yet? <a routerLink="/sign-in">Click here to register</a>
-            </p>
-
-            <p class="form-actions">
-                <button class="login-button">Login</button>
-            </p>
-        </div>
+  <div>
+    <div class="control no-margin">
+      <label for="username">Username</label>
+      <input id="username" type="username" formControlName="username" />
     </div>
 
-    @if (usernameIsInvalid) {
-        <p class="control-error">Please enter a valid username</p>
-    }
+    <div class="control no-margin">
+      <label for="password">Password</label>
+      <input id="password" type="password" formControlName="password" />
+    </div>
 
-    @if (passwordIsInvalid) {
-        <p class="control-error">Please enter a valid password</p>
-    }
+    <div class="form-footer">
+      <p class="register-text">
+        Don’t have a user yet? <a routerLink="/sign-in">Click here to register</a>
+      </p>
 
+      <p class="form-actions">
+        <button class="login-button">Login</button>
+      </p>
+    </div>
+  </div>
+
+  @if (usernameIsInvalid) {
+    <p class="control-error">Please enter a valid username</p>
+  }
+
+  @if (passwordIsInvalid) {
+    <p class="control-error">Please enter a valid password</p>
+  }
 </form>

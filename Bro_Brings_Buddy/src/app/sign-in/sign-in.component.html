@@ -9,13 +9,15 @@
 
   <div class="control">
     <label for="username">Username</label>
-    <input id="username" type="username" name="username" formControlName="username"/>
+    <input id="username" type="username" name="username" formControlName="username" />
   </div>
 
   <div class="control-row">
     <div class="control">
-      <label for="password">Password
-        <span class="info-icon" title="Password requirements">ⓘ
+      <label for="password"
+        >Password
+        <span class="info-icon" title="Password requirements"
+          >ⓘ
           <span class="tooltip">
             Password requirements:
             <ul>
@@ -48,9 +50,7 @@
   </div>
 
   <div class="form-footer">
-    <p class="login-text">
-      Have an account? <a routerLink="/log-in">Click here to log in</a>
-    </p>
+    <p class="login-text">Have an account? <a routerLink="/log-in">Click here to log in</a></p>
 
     <p class="form-actions">
       <button type="button" class="button button-flat" (click)="onReset()">Reset</button>

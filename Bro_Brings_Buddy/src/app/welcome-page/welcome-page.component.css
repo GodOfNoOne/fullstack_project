@@ -1,4 +1,3 @@
-
 .auth-buttons {
   position: absolute;
   top: 16px;
@@ -29,6 +28,11 @@ h1 {
 }
 
 .subtitle {
-  color:black;
+  color: black;
   font-size: clamp(80px, 2vw, 14px);
+}
+
+.welcome-info {
+  color: black;
+  font-size: clamp(25px, 2vw, 14px);
 }
