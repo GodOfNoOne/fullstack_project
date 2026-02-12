@@ -31,6 +31,13 @@ export class ApplicationsListComponent {
     return false
   })
 
+  canAddApp = computed(() => {
+    if (this.role() === 'bro') {
+      return false
+    }
+    return true
+  })
+
   private applicationService = inject(ApplicationService)
   applicationsList = computed(() => {
     if (this.pageType() === 'Admin') {
