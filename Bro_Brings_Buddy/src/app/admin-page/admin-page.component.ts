@@ -14,5 +14,6 @@ import { ApplicationsListComponent } from '../applications-list/applications-lis
 export class AdminPageComponent {
   //When I make backend I'll make a service that will get the username and roll
   username = signal('GodOfNoOne')
+  role = signal<Role>('admin')
   pageType = signal<Page>('Admin')
 }

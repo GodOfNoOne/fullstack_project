@@ -15,18 +15,21 @@ export class UserManageService {
   private _currentUser = signal<User | undefined>(undefined)
 
   currentUser = computed(() => this._currentUser())
-  username = computed(() => this._currentUser()?.name ?? undefined)
+  username = computed(() => this._currentUser()?.username ?? undefined)
   role = computed(() => this._currentUser()?.role ?? undefined)
 
-  login(name: string, password: string) {
+  login(username: string, password: string) {
     return this.httpClient.post<User>(`${this.baseUrl}/login`, {
-      name,
+      username,
       password,
     })
   }
 
-  createUser(name: string, password: string) {
-    return this.httpClient.post<User>(`${this.baseUrl}`, { name, password })
+  createUser(username: string, password: string) {
+    return this.httpClient.post<User>(`${this.baseUrl}`, {
+      username,
+      password,
+    })
   }
 
   setUser(user: User) {

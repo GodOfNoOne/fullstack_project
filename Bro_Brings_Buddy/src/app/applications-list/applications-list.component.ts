@@ -1,10 +1,11 @@
-import { Component, computed, inject, input } from '@angular/core'
+import { Component, computed, inject, input, OnInit, signal } from '@angular/core'
 import { ApplicationComponent } from './application/application.component'
 import { ApplicationService } from './application.service'
 import { Role } from '../models/role.model'
 import { Page } from '../models/page.model'
 import { MatDialog } from '@angular/material/dialog'
 import { NewApplicationComponent } from './new-application/new-application.component'
+import { ApplicationFrom } from '../models/application-form.model'
 
 @Component({
   selector: 'app-applications-list',
@@ -13,9 +14,18 @@ import { NewApplicationComponent } from './new-application/new-application.compo
   styleUrl: './applications-list.component.css',
 })
 export class ApplicationsListComponent {
+  private applicationService = inject(ApplicationService)
+
+  applicationsList = signal<ApplicationFrom[]>([])
   username = input<string>()
   role = input<Role>()
   pageType = input<Page>()
+
+  ngOnInit() {
+    this.applicationService
+      .getApplicationsForUser(this.username()!, this.role()!, this.pageType()!)
+      .subscribe((apps) => this.applicationsList.set(apps))
+  }
 
   canDeleteApp = computed(() => {
     if (this.role() === 'bro') {
@@ -38,25 +48,9 @@ export class ApplicationsListComponent {
     return true
   })
 
-  private applicationService = inject(ApplicationService)
-  applicationsList = computed(() => {
-    if (this.pageType() === 'Admin') {
-      return this.applicationService
-        .getApplications()
-        .filter((app) => app.fromUser !== this.username())
-    } else if (this.role() === 'member') {
-      return this.applicationService
-        .getApplications()
-        .filter((app) => app.fromUser === this.username() && app.appType === 'Member')
-    } else if (this.role() === 'admin') {
-      return this.applicationService
-        .getApplications()
-        .filter((app) => app.fromUser === this.username())
-    }
-    return this.applicationService
-      .getApplications()
-      .filter((app) => app.forUser === this.username() && app.appType === 'Member')
-  })
+  onDeleteApp(appId: number) {
+    this.applicationsList.update((apps) => apps.filter((app) => app.appId !== appId))
+  }
 
   private dialog = inject(MatDialog)
 

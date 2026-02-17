@@ -12,6 +12,7 @@
             [application]="app"
             [canDeleteApp]="canDeleteApp()"
             [canVote]="canVote()"
+            (deleteApp)="onDeleteApp($event)"
           />
         </li>
       }

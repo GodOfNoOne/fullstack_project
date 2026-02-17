@@ -16,7 +16,7 @@
     </div>
 
     @if (canDeleteApp() && !canVote()) {
-      <button class="delete-button">🗑️ delete application</button>
+      <button class="delete-button" (click)="onDelete()">🗑️ delete application</button>
     } @else if (canVote()) {
       <div class="admin-actions">
         <button class="approve-button">👍 approve</button>
