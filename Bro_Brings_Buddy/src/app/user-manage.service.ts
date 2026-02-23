@@ -31,7 +31,6 @@ export class UserManageService {
   }
 
   setUser(payload: Payload) {
-    console.log(payload)
     const user = {
       username: payload.username,
       role: payload.role,

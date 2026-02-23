@@ -3,11 +3,11 @@
 </div>
 
 <app-header [username]="username()" [role]="role()" [pageType]="pageType()" />
-@if (role() === 'bro') {
+@if (role() === RoleEnum.bro) {
   <app-home-bro-view [username]="username()" [role]="role()" />
-} @else if (role() === 'member') {
+} @else if (role() === RoleEnum.member) {
   <app-home-member-view [username]="username()" [role]="role()" />
-} @else if (role() === 'admin') {
+} @else if (role() === RoleEnum.admin) {
   <app-home-admin-view [username]="username()" [role]="role()" />
 } @else {
   <p>no username or role got</p>

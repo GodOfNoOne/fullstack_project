@@ -4,7 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { ApplicationService } from '../application.service'
-import { AppType } from '../../models/app-type.model'
+import { AppType, AppTypeEnum } from '../../models/app-type.model'
 
 @Component({
   selector: 'app-new-application',
@@ -17,7 +17,7 @@ export class NewApplicationComponent implements OnInit {
   private dialogRef = inject(MatDialogRef<NewApplicationComponent>)
   private applicationService = inject(ApplicationService)
   pageType = inject(MAT_DIALOG_DATA).pageType
-  appType = this.pageType ? 'Admin' : 'Member'
+  appType = this.pageType ? AppTypeEnum.Admin : AppTypeEnum.Member
 
   users = signal<string[]>([])
 
@@ -56,7 +56,6 @@ export class NewApplicationComponent implements OnInit {
       return
     }
 
-    console.log(`Submitted ${this.appType} Application for:`, selectedUser)
     this.dialogRef.close({ selectedUser: selectedUser, appType: this.appType })
   }
 

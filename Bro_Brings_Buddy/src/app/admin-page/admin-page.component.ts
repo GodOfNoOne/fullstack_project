@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core'
-import { Page } from '../models/page.model'
+import { Page, PageEnum } from '../models/page.model'
 import { HeaderComponent } from '../header/header.component'
 import { Router } from '@angular/router'
 import { ApplicationsListComponent } from '../applications-list/applications-list.component'
@@ -22,7 +22,7 @@ export class AdminPageComponent implements OnInit {
 
   username = this.userService.username
   role = this.userService.role
-  pageType = signal<Page>('Admin')
+  pageType = signal<Page>(PageEnum.Admin)
 
   goToHome() {
     this.router.navigate(['/home'])

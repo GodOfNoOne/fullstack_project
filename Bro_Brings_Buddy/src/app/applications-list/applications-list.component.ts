@@ -1,12 +1,13 @@
 import { Component, computed, inject, input, OnInit, signal } from '@angular/core'
 import { ApplicationComponent } from './application/application.component'
 import { ApplicationService } from './application.service'
-import { Role } from '../models/role.model'
-import { Page } from '../models/page.model'
+import { Role, RoleEnum } from '../models/role.model'
+import { Page, PageEnum } from '../models/page.model'
 import { MatDialog } from '@angular/material/dialog'
 import { NewApplicationComponent } from './new-application/new-application.component'
 import { ApplicationFrom } from '../models/application-form.model'
 import { finalize } from 'rxjs'
+import { VoteTypeEnum } from '../models/voteType.model'
 
 @Component({
   selector: 'app-applications-list',
@@ -28,21 +29,21 @@ export class ApplicationsListComponent {
   }
 
   canDeleteApp = computed(() => {
-    if (this.role() === 'bro') {
+    if (this.role() === RoleEnum.bro) {
       return false
     }
     return true
   })
 
   canVote = computed(() => {
-    if (this.pageType() === 'Admin') {
+    if (this.pageType() === PageEnum.Admin) {
       return true
     }
     return false
   })
 
   canAddApp = computed(() => {
-    if (this.role() === 'bro') {
+    if (this.role() === RoleEnum.bro) {
       return false
     }
     return true
@@ -65,7 +66,7 @@ export class ApplicationsListComponent {
   }
 
   onVote(appId: number) {
-    this.applicationService.updateAdminVotes(appId, 'Vote').subscribe({
+    this.applicationService.updateAdminVotes(appId, VoteTypeEnum.Vote).subscribe({
       next: () => {
         this.reloadApplications()
       },
@@ -76,7 +77,7 @@ export class ApplicationsListComponent {
   }
 
   onUnvote(appId: number) {
-    this.applicationService.updateAdminVotes(appId, 'Unvote').subscribe({
+    this.applicationService.updateAdminVotes(appId, VoteTypeEnum.Unvote).subscribe({
       next: () => {
         this.reloadApplications()
       },

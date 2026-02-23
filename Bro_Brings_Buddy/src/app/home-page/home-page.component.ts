@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core'
 import { Router } from '@angular/router'
-import { Role } from '../models/role.model'
+import { Role, RoleEnum } from '../models/role.model'
 import { HomeBroViewComponent } from './home-bro-view/home-bro-view.component'
 import { HomeMemberViewComponent } from './home-member-view/home-member-view.component'
 import { HomeAdminViewComponent } from './home-admin-view/home-admin-view.component'
@@ -24,6 +24,7 @@ import { NavButtonsComponent } from '../nav-buttons/nav-buttons.component'
 export class HomePageComponent {
   private router = inject(Router)
   private userService = inject(UserManageService)
+  protected RoleEnum = RoleEnum
 
   username = this.userService.username
   role = this.userService.role
