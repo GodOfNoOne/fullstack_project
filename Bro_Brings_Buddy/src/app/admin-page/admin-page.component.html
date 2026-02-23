@@ -1,8 +1,5 @@
 <div class="back-container">
-  <div class="nav-buttons"></div>
-  <button class="nav-button left" routerLink="/home">
-    <span class="arrow">⟵</span> Return to Home Page
-  </button>
+  <app-nav-buttons [label]="'Back to Home Page'" [direction]="'left'" (clicked)="goToHome()" />
 </div>
 
 <app-header [username]="username()" [pageType]="pageType()" />

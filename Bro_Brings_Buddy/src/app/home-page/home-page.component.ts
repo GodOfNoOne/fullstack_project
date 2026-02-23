@@ -7,20 +7,23 @@ import { HomeAdminViewComponent } from './home-admin-view/home-admin-view.compon
 import { HeaderComponent } from '../header/header.component'
 import { Page } from '../models/page.model'
 import { UserManageService } from '../user-manage.service'
+import { NavButtonsComponent } from '../nav-buttons/nav-buttons.component'
 
 @Component({
   selector: 'app-home-page',
-  imports: [HeaderComponent, HomeBroViewComponent, HomeMemberViewComponent, HomeAdminViewComponent],
+  imports: [
+    HeaderComponent,
+    HomeBroViewComponent,
+    HomeMemberViewComponent,
+    HomeAdminViewComponent,
+    NavButtonsComponent,
+  ],
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css'],
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent {
   private router = inject(Router)
   private userService = inject(UserManageService)
-
-  ngOnInit(): void {
-    this.userService.restoreUser()
-  }
 
   username = this.userService.username
   role = this.userService.role

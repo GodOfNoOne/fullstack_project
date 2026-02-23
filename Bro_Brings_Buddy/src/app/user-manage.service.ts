@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { computed, inject, Injectable, signal } from '@angular/core'
 import { Router } from '@angular/router'
 import { User } from './models/user.model'
+import { Payload } from './models/payload.model'
+import { environment } from '../environments/environments'
 
 @Injectable({
   providedIn: 'root',
@@ -10,54 +12,66 @@ export class UserManageService {
   private httpClient = inject(HttpClient)
   private router = inject(Router)
 
-  private baseUrl = 'http://localhost:3000/users'
+  private baseUrl = environment.baseUrl
 
   private _currentUser = signal<User | undefined>(undefined)
 
-  currentUser = computed(() => this._currentUser())
   username = computed(() => this._currentUser()?.username ?? undefined)
   role = computed(() => this._currentUser()?.role ?? undefined)
 
   login(username: string, password: string) {
-    return this.httpClient.post<User>(`${this.baseUrl}/login`, {
-      username,
-      password,
-    })
+    return this.httpClient.post<Payload>(`${this.baseUrl}/auth/login`, { username, password })
   }
 
   createUser(username: string, password: string) {
-    return this.httpClient.post<User>(`${this.baseUrl}`, {
+    return this.httpClient.post<Payload>(`${this.baseUrl}/auth/register`, {
       username,
       password,
     })
   }
 
-  setUser(user: User) {
-    console.log(user)
+  setUser(payload: Payload) {
+    console.log(payload)
+    const user = {
+      username: payload.username,
+      role: payload.role,
+    }
     this._currentUser.set(user)
-    localStorage.setItem('username', user.username)
+    localStorage.setItem('jwt', payload.access_token)
   }
 
   logout() {
     this._currentUser.set(undefined)
-    localStorage.removeItem('username')
+    localStorage.removeItem('jwt')
     this.router.navigate([''])
   }
 
-  restoreUser() {
-    const username = localStorage.getItem('username')
+  getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('jwt')
+    return new HttpHeaders({ Authorization: `Bearer ${token}` })
+  }
 
-    if (!username) return
+  restoreUser(): Promise<void> {
+    const access_token = localStorage.getItem('jwt')
 
-    this.httpClient.get<User>(this.baseUrl, { params: { username } }).subscribe({
-      next: (user) => {
-        if (user) {
-          this._currentUser.set(user)
-        }
-      },
-      error: () => {
-        this.logout()
-      },
+    if (!access_token) return Promise.resolve()
+
+    return new Promise((resolve) => {
+      this.httpClient
+        .get<User>(`${this.baseUrl}/users/me`, {
+          headers: this.getAuthHeaders(),
+        })
+        .subscribe({
+          next: (user) => {
+            this._currentUser.set(user)
+            resolve()
+          },
+          error: (err) => {
+            alert(err.error.message)
+            this.logout()
+            resolve()
+          },
+        })
     })
   }
 }

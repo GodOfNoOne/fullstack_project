@@ -1,6 +1,7 @@
 import { Role } from './role.model'
 
-export interface User {
+export type Payload = {
+  access_token: string
   username: string
   role: Role
 }

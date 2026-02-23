@@ -1,9 +1,9 @@
 <div class="back-container">
-  <div class="nav-buttons">
-    <button class="nav-button left" routerLink="/welcome">
-      <span class="arrow">⟵</span> Back to Welcome Page
-    </button>
-  </div>
+  <app-nav-buttons
+    [label]="'Back to Welcome Page'"
+    [direction]="'left'"
+    (clicked)="goToWelcome()"
+  />
 </div>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -52,7 +52,7 @@
   </div>
 
   <div class="form-footer">
-    <p class="login-text">Have an account? <a routerLink="/log-in">Click here to log in</a></p>
+    <p class="login-text">Have an account? <a (click)="goToLogIn()">Click here to log in</a></p>
 
     <p class="form-actions">
       <button type="button" class="button button-flat" (click)="onReset()">Reset</button>

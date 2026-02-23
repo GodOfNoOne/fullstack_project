@@ -1,6 +1,5 @@
 <div class="back-container">
-  <div class="nav-buttons"></div>
-  <button class="nav-button left" (click)="onLogOut()"><span class="arrow">⟵</span> Log Out</button>
+  <app-nav-buttons [label]="'Log Out'" [direction]="'left'" (clicked)="onLogOut()" />
 </div>
 
 <app-header [username]="username()" [role]="role()" [pageType]="pageType()" />

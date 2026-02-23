@@ -11,6 +11,7 @@ import { AppType } from '../../models/app-type.model'
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, MatAutocompleteModule],
   templateUrl: './new-application.component.html',
+  styleUrl: './new-application.component.css',
 })
 export class NewApplicationComponent implements OnInit {
   private dialogRef = inject(MatDialogRef<NewApplicationComponent>)

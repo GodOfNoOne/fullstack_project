@@ -2,3 +2,13 @@
   font-weight: 600;
   margin-left: 0.25rem;
 }
+.full-width {
+  width: 100%;
+}
+
+.actions-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}

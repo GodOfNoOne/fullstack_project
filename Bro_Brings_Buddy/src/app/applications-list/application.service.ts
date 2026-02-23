@@ -5,23 +5,18 @@ import { Page } from '../models/page.model'
 import { Observable } from 'rxjs'
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { AppType } from '../models/app-type.model'
+import { VoteType } from '../models/voteType.model'
+import { environment } from '../../environments/environments'
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApplicationService {
   private http = inject(HttpClient)
-  private baseUrl = 'http://localhost:3000/applications'
+  private baseUrl = `${environment.baseUrl}/applications`
 
-  getApplicationsForUser(
-    username: string,
-    role: Role,
-    pageType: Page,
-  ): Observable<ApplicationFrom[]> {
-    const params = new HttpParams()
-      .set('username', username)
-      .set('role', role)
-      .set('pageType', pageType)
+  getApplicationsForUser(pageType: Page): Observable<ApplicationFrom[]> {
+    const params = new HttpParams().set('pageType', pageType)
 
     return this.http.get<ApplicationFrom[]>(this.baseUrl, { params })
   }
@@ -30,22 +25,16 @@ export class ApplicationService {
     return this.http.get<string[]>(`${this.baseUrl}/available/${appType}`)
   }
 
-  createNewApplication(
-    fromUser: string,
-    forUser: string,
-    appType: AppType,
-  ): Observable<ApplicationFrom> {
+  createNewApplication(forUser: string, appType: AppType): Observable<ApplicationFrom> {
     return this.http.post<ApplicationFrom>(this.baseUrl, {
-      fromUser: fromUser,
-      forUser: forUser,
-      appType: appType,
+      forUser,
+      appType,
     })
   }
 
-  updateAdminVotes(appId: number, voteType: 'Vote' | 'Unvote', username: string) {
+  updateAdminVotes(appId: number, voteType: VoteType) {
     return this.http.patch<void>(`${this.baseUrl}/${appId}`, {
-      voteType: voteType,
-      username: username,
+      voteType,
     })
   }
 

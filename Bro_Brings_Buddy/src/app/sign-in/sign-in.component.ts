@@ -6,8 +6,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms'
-import { Router, RouterLink } from '@angular/router'
+import { Router } from '@angular/router'
 import { UserManageService } from '../user-manage.service'
+import { NavButtonsComponent } from '../nav-buttons/nav-buttons.component'
 
 function equalVals(controlName1: string, controlName2: string) {
   return (control: AbstractControl) => {
@@ -39,7 +40,7 @@ function validPassword(control: AbstractControl) {
 
 @Component({
   selector: 'app-sign-in.component',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, NavButtonsComponent],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css',
 })
@@ -72,8 +73,8 @@ export class SignInComponent {
     const password = this.form.controls.passwords.controls.password.value!
 
     this.userService.createUser(username, password).subscribe({
-      next: (user) => {
-        this.userService.setUser(user)
+      next: (payload) => {
+        this.userService.setUser(payload)
         this.router.navigate(['/home'])
       },
       error: (err) => {
@@ -84,5 +85,13 @@ export class SignInComponent {
   }
   onReset() {
     this.form.reset()
+  }
+
+  goToWelcome() {
+    this.router.navigate([''])
+  }
+
+  goToLogIn() {
+    this.router.navigate(['/log-in'])
   }
 }

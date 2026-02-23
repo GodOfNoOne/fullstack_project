@@ -48,8 +48,6 @@ export class ApplicationsListComponent {
     return true
   })
 
-  onAddApp() {}
-
   onDeleteApp(appId: number) {
     this.loading.set(true)
 
@@ -67,7 +65,7 @@ export class ApplicationsListComponent {
   }
 
   onVote(appId: number) {
-    this.applicationService.updateAdminVotes(appId, 'Vote', this.username()!).subscribe({
+    this.applicationService.updateAdminVotes(appId, 'Vote').subscribe({
       next: () => {
         this.reloadApplications()
       },
@@ -78,7 +76,7 @@ export class ApplicationsListComponent {
   }
 
   onUnvote(appId: number) {
-    this.applicationService.updateAdminVotes(appId, 'Unvote', this.username()!).subscribe({
+    this.applicationService.updateAdminVotes(appId, 'Unvote').subscribe({
       next: () => {
         this.reloadApplications()
       },
@@ -92,7 +90,7 @@ export class ApplicationsListComponent {
     this.loading.set(true)
 
     this.applicationService
-      .getApplicationsForUser(this.username()!, this.role()!, this.pageType()!)
+      .getApplicationsForUser(this.pageType()!)
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe((apps) => this.applicationsList.set(apps))
   }
@@ -101,7 +99,7 @@ export class ApplicationsListComponent {
 
   openNewAppDialog() {
     const dialogRef = this.dialog.open(NewApplicationComponent, {
-      width: '500px',
+      width: '31.25rem',
       disableClose: true,
       panelClass: 'custom-dialog',
       data: {
@@ -113,7 +111,7 @@ export class ApplicationsListComponent {
       if (!submitResult) return
 
       this.applicationService
-        .createNewApplication(this.username()!, submitResult.selectedUser, submitResult.appType)
+        .createNewApplication(submitResult.selectedUser, submitResult.appType)
         .subscribe({
           next: () => {
             this.reloadApplications()

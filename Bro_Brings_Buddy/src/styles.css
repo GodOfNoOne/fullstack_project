@@ -34,12 +34,12 @@ html {
 
 .nav-button.left:hover .arrow,
 .nav-button.left:focus .arrow {
-  transform: translateX(-6px);
+  transform: translateX(-0.4rem);
 }
 
 .nav-button.right:hover .arrow,
 .nav-button.right:focus .arrow {
-  transform: translateX(6px);
+  transform: translateX(0.4rem);
 }
 
 .back-container {
@@ -55,7 +55,7 @@ form {
   padding: 2rem;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.4));
   border-radius: 1rem;
-  box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 1rem 0.05rem rgba(0, 0, 0, 0.5);
 }
 
 .form-actions {
@@ -89,7 +89,7 @@ fieldset {
   padding: 0.5rem;
   font-size: 1rem;
   border-radius: 0.25rem;
-  border: 1px solid #585858;
+  border: 0.05rem solid #585858;
   background-color: rgba(255, 255, 255, 0.4);
   color: #142020;
 }
@@ -185,17 +185,9 @@ input.ng-invalid.ng-touched.ng-dirty {
 
 .mat-mdc-autocomplete-panel {
   background-color: #ffffff !important;
-  border-radius: 12px;
-}
-
-.mat-mdc-option {
-  background-color: white !important;
+  border-radius: 0.75rem;
 }
 
 .mat-mdc-option:hover {
   background-color: #f0f0f0 !important;
-}
-
-.mat-mdc-option.mdc-list-item--selected {
-  background-color: #e3f2fd !important;
 }
